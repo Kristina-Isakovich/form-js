@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href=".//index.css">
+</head>
+<body>
+
+<form class = "form">
+    <fieldset class="case">
+        <legend>Name</legend>
+        <label for = "name">Name:</label>
+        <input type="text" id="name" required>
+        <div class="error error-name"></div>
+    </fieldset>
+
+    <fieldset class="case">
+        <legend>Age</legend>
+        <label for ="age">Age:</label>
+        <input type="number" id="age" required>
+        <div class="error error-age"></div>
+    </fieldset>
+
+    <div class="buttons">
+        <button type="submit">Submit</button>
+        <button type="reset">Reset</button>
+    </div>
+</form>
+
+<table class="table" border="2">
+    <tr><th>Name</th><th>Age</th></tr>
+</table>
+
+<script>
+    const form = document.querySelector('.form');
+    const name = document.querySelector('#name');
+    const age = document.querySelector('#age');
+    const errorName = document.querySelector('.error-name');
+    const errorAge = document.querySelector('.error-age');
+    const table = document.querySelector('.table')
+
+    form.addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        if (name.value.length > 30 || name.value.length < 10) {
+            errorName.innerHTML = 'No validity Name!';
+        }
+
+        if (age.value <= 18 || age.value >= 99) {
+            errorAge.innerHTML = 'No validity Age!';
+        }
+
+        tableCreate();
+    });
+
+    form.addEventListener('reset', () => {
+        errorName.innerHTML = '';
+        errorAge.innerHTML = '';
+    });
+
+    function tableCreate() {
+        let rows = '';
+        rows += "<td>" + name.value + "</td><td>" + age.value + "</td>";
+        let tr = document.createElement("tr");
+
+        tr.innerHTML = rows;
+        table.appendChild(tr);
+    }
+
+</script>
+
+</body>
+</html>
