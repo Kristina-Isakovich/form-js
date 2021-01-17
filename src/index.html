@@ -29,7 +29,7 @@
 </form>
 
 <table class="table" border="2">
-    <tr><th>Name</th><th>Age</th></tr>
+    <tr><th>Name</th><th>Age</th><th>Delete</th></tr>
 </table>
 
 <script>
@@ -38,20 +38,16 @@
     const age = document.querySelector('#age');
     const errorName = document.querySelector('.error-name');
     const errorAge = document.querySelector('.error-age');
-    const table = document.querySelector('.table')
+    const table = document.querySelector('.table');
 
     form.addEventListener('submit', function (event) {
         event.preventDefault();
 
         if (name.value.length > 30 || name.value.length < 10) {
             errorName.innerHTML = 'No validity Name!';
-        }
-
-        if (age.value <= 18 || age.value >= 99) {
+        } else if (age.value <= 18 || age.value >= 99) {
             errorAge.innerHTML = 'No validity Age!';
-        }
-
-        tableCreate();
+        } else tableCreate();
     });
 
     form.addEventListener('reset', () => {
@@ -61,12 +57,27 @@
 
     function tableCreate() {
         let rows = '';
-        rows += "<td>" + name.value + "</td><td>" + age.value + "</td>";
+        rows += "<td>" + name.value + "</td><td>" + age.value +
+            "</td><td><button class='btn-delete'>Delete!</button></td>";
         let tr = document.createElement("tr");
 
         tr.innerHTML = rows;
         table.appendChild(tr);
+
+        let btnDelete = document.querySelector('.btn-delete');
+        btnDelete.addEventListener('click', () => tr.remove());
     }
+
+    function users() {
+        let nameUser = name.value;
+        let ageUser = age.value;
+        let user = {
+            name: nameUser,
+            age: ageUser,
+        };
+
+    }
+
 
 </script>
 
