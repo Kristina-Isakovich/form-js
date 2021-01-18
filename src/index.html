@@ -40,6 +40,14 @@
     const errorAge = document.querySelector('.error-age');
     const table = document.querySelector('.table');
 
+    let usersArray = [];
+    localStorage.setItem('items', JSON.stringify(usersArray));
+    let user = {
+        name:  name.value,
+        age: age.value,
+    };
+
+
     form.addEventListener('submit', function (event) {
         event.preventDefault();
 
@@ -48,6 +56,9 @@
         } else if (age.value <= 18 || age.value >= 99) {
             errorAge.innerHTML = 'No validity Age!';
         } else tableCreate();
+
+        usersArray.push(user);
+        localStorage.setItem('users', JSON.stringify(usersArray))
     });
 
     form.addEventListener('reset', () => {
@@ -67,17 +78,6 @@
         let btnDelete = document.querySelector('.btn-delete');
         btnDelete.addEventListener('click', () => tr.remove());
     }
-
-    function users() {
-        let nameUser = name.value;
-        let ageUser = age.value;
-        let user = {
-            name: nameUser,
-            age: ageUser,
-        };
-
-    }
-
 
 </script>
 
